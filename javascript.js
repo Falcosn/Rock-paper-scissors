@@ -1,31 +1,32 @@
 
+const computerSelection = getComputerChoice()
+const playerSelection = playerChoice() 
+const result = playGame(computerSelection, playerSelection)
 
-
-
-function playerSelection() 
+function playerChoice() 
 {
-  let player_Move = prompt("what do you play :rock paper scissors",).toLowerCase()
+  let playerMove = prompt("what do you play \nrock paper scissors",).toLowerCase()
   let result; 
   
-  if (player_Move === 'rock')
+  if (playerMove === 'rock')
   {
     result = 'rock';
   }
-  else if (player_Move === 'paper')
+  else if (playerMove === 'paper')
   {
     result = 'paper';
   }
-  else if (player_Move === 'scissors')
+  else if (playerMove === 'scissors')
   {
     result = 'scissors';
   }
   else
   {
     console.log("wrong try again")
-    playerSelection();
+    playerChoice();
   }
 
-  return result
+  return result;
 }
 
 
@@ -46,7 +47,38 @@ function getComputerChoice ()
   {
     result = 'scissors';
   }
+ 
+  return result;
+}
+
+
+function playGame(computer, player) 
+{
+  let result; 
+
+  if (computer === player)
+  {
+    result = "its a tie"
+  }
+  else if (player === 'rock' && computer === 'paper')
+  {
+    result = "you win"
+  }
+  else if (player === 'paper' && computer === 'rock')
+  {
+    result = "you win"
+  }
+  else if (player === 'scissors' && computer === 'paper')
+  {
+    result = "you win"
+  }
+  else
+  {
+    result = "you lost"
+  }
 
   return result;
 }
 
+alert(`computer chosen ${computerSelection} you chosen ${playerSelection} so ${result}`)
+console.log(`computer chosen ${computerSelection} you chosen ${playerSelection} so ${result}`)
