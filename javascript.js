@@ -1,11 +1,9 @@
-
-const computerSelection = getComputerChoice()
-const playerSelection = playerChoice() 
-const result = playGame(computerSelection, playerSelection)
+ 
+// const result = playRound(computerSelection, playerSelection)
 
 function playerChoice() 
 {
-  let playerMove = prompt("what do you play \nrock paper scissors",).toLowerCase()
+  let playerMove = prompt("what do you play \nrock paper scissors").toLowerCase()
   let result; 
   
   if (playerMove === 'rock')
@@ -22,7 +20,7 @@ function playerChoice()
   }
   else
   {
-    console.log("wrong try again")
+    console.log("wrong try again");
     playerChoice();
   }
 
@@ -52,33 +50,70 @@ function getComputerChoice ()
 }
 
 
-function playGame(computer, player) 
+function playRound() 
 {
   let result; 
+  const computer = getComputerChoice()
+  const player = playerChoice()
 
   if (computer === player)
   {
-    result = "its a tie"
+    result = "its a tie";
+    //ties++;
   }
   else if (player === 'rock' && computer === 'paper')
   {
-    result = "you win"
+    result = "you win";
+   // wins++;
   }
   else if (player === 'paper' && computer === 'rock')
   {
-    result = "you win"
+    result = "you win";
+   // wins++;
   }
   else if (player === 'scissors' && computer === 'paper')
   {
-    result = "you win"
+    result = "you win";
+   // wins++;
   }
   else
   {
-    result = "you lost"
+    result = "you lost";
+   // losses++;
   }
 
+  alert(`computer chosen ${computer} you chosen ${player} so ${result}`)
+ 
   return result;
 }
 
-alert(`computer chosen ${computerSelection} you chosen ${playerSelection} so ${result}`)
-console.log(`computer chosen ${computerSelection} you chosen ${playerSelection} so ${result}`)
+function playGame()
+{
+  let wins = 0;
+  let losses = 0;
+  let ties = 0;
+
+  for (round = 1; round <= 5; round++)
+  {
+    let result = playRound()
+
+    if (result == 'you win')
+    {
+      wins++
+    }
+    else if (result == 'you losses')
+    {
+      losses++
+    }
+    else
+    {
+      ties++
+    }
+  }
+    console.log(`wins : ${wins} \nlosses : ${losses} \nties : ${ties}`)
+
+
+}
+
+playGame()
+
