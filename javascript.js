@@ -1,6 +1,8 @@
  
 // const result = playRound(computerSelection, playerSelection)
 
+alert ("5 games rock paper scissors\n ties don't count good luck")
+
 function playerChoice() 
 {
   let playerMove = prompt("what do you play \nrock paper scissors").toLowerCase()
@@ -21,7 +23,7 @@ function playerChoice()
   else
   {
     console.log("wrong try again");
-    playerChoice();
+    return playerChoice();
   }
 
   return result;
@@ -61,7 +63,7 @@ function playRound()
     result = "its a tie";
     //ties++;
   }
-  else if (player === 'rock' && computer === 'paper')
+  else if (player === 'rock' && computer === 'scissors')
   {
     result = "you win";
    // wins++;
@@ -93,26 +95,40 @@ function playGame()
   let losses = 0;
   let ties = 0;
 
-  for (round = 1; round <= 5; round++)
-  {
-    let result = playRound()
 
+  for (round = 0; round <= 4; round++)
+  {
+    console.log(`round number: ${round + 1}`)
+    let result = playRound()
+    
     if (result == 'you win')
     {
       wins++
+      console.log('win')
     }
-    else if (result == 'you losses')
+    else if (result == 'you lost')
     {
       losses++
+      console.log('lost')
     }
     else
     {
+      round--
       ties++
+      console.log('its tie so try again')
     }
+    console.log(`the score is\nwins : ${wins} \nlosses : ${losses} \nties : ${ties}`)
+    
   }
-    console.log(`wins : ${wins} \nlosses : ${losses} \nties : ${ties}`)
-
-
+  
+  if (wins > losses)
+  {
+    console.log('you win the game')
+  }
+  else if (losses > wins)
+  {
+    console.log('you lost the game')
+  }
 }
 
 playGame()
