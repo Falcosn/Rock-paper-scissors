@@ -1,0 +1,43 @@
+body
+{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(28, 30, 36);
+  color: white;
+
+  display: flex; /* This enables Flexbox for the container */
+  flex-direction: column; /* This stacks the children vertically */
+}
+button
+{
+  background-color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 5px 20px;
+  font-size: 16px;
+  margin: 10px 5px; 
+}
+
+#score, #game-moves
+{
+  margin: 12px 0px;
+  font-size: 18px;
+}
+
+#round-announce
+{
+  margin: 0;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.center
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+ 
+}
+
+ 

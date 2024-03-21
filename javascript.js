@@ -1,33 +1,37 @@
- 
-// const result = playRound(computerSelection, playerSelection)
 
-alert ("5 games rock paper scissors\n ties don't count good luck")
+let wins = 0;
+let losses = 0;
+let ties = 0;
+let round = 1;
 
-function playerChoice() 
-{
-  let playerMove = prompt("what do you play \nrock paper scissors").toLowerCase()
-  let result; 
-  
-  if (playerMove === 'rock')
-  {
-    result = 'rock';
-  }
-  else if (playerMove === 'paper')
-  {
-    result = 'paper';
-  }
-  else if (playerMove === 'scissors')
-  {
-    result = 'scissors';
-  }
-  else
-  {
-    console.log("wrong try again");
-    return playerChoice();
-  }
+const buttonRock = document.querySelector('#rock')
+const buttonPaper = document.querySelector('#paper')
+const buttonScissors = document.querySelector('#scissors')
 
-  return result;
-}
+const score = document.querySelector('#score')
+
+const roundUI = document.querySelector('#round')
+const roundWinner = document.querySelector('#round-announce')
+
+const gameWinner = document.querySelector('#game-announce') 
+
+const moves = document.querySelector('#game-moves') 
+
+buttonRock.addEventListener("click", () => {
+  playGame('rock');
+})
+
+buttonPaper.addEventListener("click", () => {
+  playGame('paper');
+})
+
+buttonScissors.addEventListener("click", () => {
+  playGame('scissors');
+})
+
+
+score.textContent = `Wins : ${wins} Losses : ${losses} Ties : ${ties}`;
+roundUI.textContent = `Round Number: ${round}`
 
 
 function getComputerChoice ()
@@ -52,84 +56,67 @@ function getComputerChoice ()
 }
 
 
-function playRound() 
+function playGame(player) 
 {
   let result; 
   const computer = getComputerChoice()
-  const player = playerChoice()
-
-  if (computer === player)
-  {
-    result = "its a tie";
-    //ties++;
-  }
-  else if (player === 'rock' && computer === 'scissors')
-  {
-    result = "you win";
-   // wins++;
-  }
-  else if (player === 'paper' && computer === 'rock')
-  {
-    result = "you win";
-   // wins++;
-  }
-  else if (player === 'scissors' && computer === 'paper')
-  {
-    result = "you win";
-   // wins++;
-  }
-  else
-  {
-    result = "you lost";
-   // losses++;
-  }
-
-  alert(`computer chosen ${computer} you chosen ${player} so ${result}`)
- 
-  return result;
-}
-
-function playGame()
-{
-  let wins = 0;
-  let losses = 0;
-  let ties = 0;
-
-
-  for (round = 0; round <= 4; round++)
-  {
-    console.log(`round number: ${round + 1}`)
-    let result = playRound()
-    
-    if (result == 'you win')
+  
+  if (round <= 5) { 
+    // count to 5. if tie subtract 1. sets result and count score
+    if (computer === player) 
     {
-      wins++
-      console.log('win')
+      result = "Its a Tie, try again";
+      ties++;
+      round--;
     }
-    else if (result == 'you lost')
+    else if (player === 'rock' && computer === 'scissors')
     {
-      losses++
-      console.log('lost')
+      result = "You Win The Round";
+      wins++;
+    }
+    else if (player === 'paper' && computer === 'rock')
+    {
+      result = "You Win The Round";
+      wins++;
+    }
+    else if (player === 'scissors' && computer === 'paper')
+    {
+      result = "You Win The Round";
+      wins++;
     }
     else
     {
-      round--
-      ties++
-      console.log('its tie so try again')
+      result = "Computer Win The Round";          
+      losses++;
     }
-    console.log(`the score is\nwins : ${wins} \nlosses : ${losses} \nties : ${ties}`)
-    
+    // tell what moves are picked
+    moves.textContent = `Computer picked ${computer}. You picked ${player}`
+    round++;
+    // if round is not 6 sets a number round
+    if (round != 6) // probably dumb but i don't know how to do ti better 
+    {
+      roundUI.textContent = `Round Number: ${round}`
+    }
+    // if round is 6 sets game winner
+    else
+    {
+      if (wins > losses)
+      {
+        gameWinner.textContent = 'You Win The Game'
+      }
+      else 
+      {
+        gameWinner.textContent = 'Computer Win The Game'
+      }
+    }
+    // sets round winner
+    roundWinner.textContent = result;
   }
   
-  if (wins > losses)
-  {
-    console.log('you win the game')
-  }
-  else if (losses > wins)
-  {
-    console.log('you lost the game')
-  }
+     
+  
+  
+  score.textContent = `Wins : ${wins} Losses : ${losses} Ties : ${ties}`;
 }
 
-playGame()
 
